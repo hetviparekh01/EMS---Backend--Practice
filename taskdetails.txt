@@ -1,0 +1,90 @@
+Task:- Event Management System
+
+Description:
+- Create an event management system where users can create, view, update, and delete events.
+- The system should also allow users to register for events.
+- The application should have both a frontend built with Angular and a backend API built with Node.js and Express.
+
+Requirements:
+Frontend (Angular):
+1. User Interface:
+   - A dashboard page displaying a list of all events.
+   - A page to view details of a single event.
+   - A form to create a new event.
+   - A form to edit an existing event.
+   - A registration form for users to register for events.
+
+2. Functionality:
+   - Display a list of events fetched from the backend.
+   - View details of a single event.
+   - Create a new event.
+   - Edit an existing event.
+   - Delete an event.
+   - Register for an event.
+   - Basic validation for forms.
+
+3. Styling:
+   - Use basic CSS/SCSS to style the application.
+   - Ensure the application is responsive.
+
+Backend (Node.js + Express):
+1. API Endpoints:
+   - `GET /events` - Retrieve all events.
+   - `GET /events/:id` - Retrieve a single event by ID.
+   - `POST /events` - Create a new event.
+   - `PUT /events/:id` - Update an existing event by ID.
+   - `DELETE /events/:id` - Delete an event by ID.
+   - `POST /events/:id/register` - Register for an event.
+
+2. Data Storage:
+   - Use an in-memory data store (e.g., an array) to keep the events and registrations (for simplicity and to save time).
+
+3. Error Handling:
+   - Handle errors gracefully and return appropriate HTTP status codes.
+
+Additional Instructions:
+- The trainee should set up the project from scratch, including creating a new Angular app and setting up a Node.js server.
+- Use Angular services to handle HTTP requests to the backend.
+- Use RxJS observables for handling asynchronous operations.
+- Ensure the application follows best practices for code structure and organization.
+
+Evaluation Criteria:
+- Code Quality: Cleanliness, readability, and organization of the code.
+- Functionality: Implementation of all required features and correct behavior of the application.
+- User Interface: Usability and visual appeal of the frontend.
+- Error Handling: Proper handling of errors and edge cases.
+- Time Management: Ability to complete the task within the given timeframe.
+
+Extended Requirements:
+
+Frontend (Angular):
+1. Authentication:
+   - Implement user authentication using JWT (JSON Web Tokens).
+   - Create a login page where users can log in.
+   - Only authenticated users should be able to create, edit, or delete events.
+
+2. Event Details:
+   - Display the list of registered users for each event.
+
+3. Notifications:
+   - Show success or error notifications to the user when they perform actions like creating or deleting an event or registering for an event.
+
+Backend (Node.js + Express):
+1. Authentication:
+   - Set up user authentication using JWT.
+   - Create routes for user registration and login.
+   - Protect routes for creating, editing, and deleting events so that only authenticated users can access them.
+
+2. Registrations API:
+   - Create endpoints to handle user registrations for events:
+     - `POST /events/:id/register` - Register for an event.
+     - `GET /events/:id/registrations` - Get all registrations for an event.
+
+3. Data Persistence:
+   - Use a simple file-based storage (like JSON files) to persist data, which would be a step up from in-memory storage but still relatively simple to implement within the timeframe.
+ - Or Use any DB
+
+Additional Instructions:
+- Authentication:
+  - Use Angular guards to protect routes on the frontend.
+  - Use JWT for secure communication between frontend and backend.
