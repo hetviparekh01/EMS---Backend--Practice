@@ -69,7 +69,7 @@ export class EventController {
     }
   }
 
-  @httpGet("/geteventById/:id", RoleMiddleware(["admin", "user"]))
+  @httpGet("/getEventById/:id", RoleMiddleware(["admin", "user"]))
   async geteventById(req: Request, res: Response) {
     try {
       const { id } = req.params;

@@ -27,7 +27,7 @@ export class AuthService{
             }
             const payload={
                 _id:user._id,
-                role:user._id
+                role:user.role
             }
             const token=jwt.sign(payload,config.get("SECRET_KEY") as string,{expiresIn:'2d'})
             return {accessToken:token,userData:user}

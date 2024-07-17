@@ -15,7 +15,7 @@ import { errorHandler } from "../utils";
 export class UserController {
   constructor(
     @inject<UserService>(TYPES.UserService) private userService: UserService
-  ) {}
+  ) { }
 
   @httpPut(
     "/updateUser/:id",
@@ -39,8 +39,8 @@ export class UserController {
         .status(statusCode.Created)
         .json({ status: true, message: message.USERUPDATED });
     } catch (error: any) {
-       const errorMessage = errorHandler(error);
-       return { status: false, ...errorMessage };
+      const errorMessage = errorHandler(error);
+      return { status: false, ...errorMessage };
     }
   }
 
@@ -67,8 +67,8 @@ export class UserController {
         .status(statusCode.Created)
         .json({ status: true, message: message.USERUPDATED });
     } catch (error: any) {
-        const errorMessage = errorHandler(error);
-        return { status: false, ...errorMessage };
+      const errorMessage = errorHandler(error);
+      return { status: false, ...errorMessage };
     }
   }
 
@@ -81,8 +81,8 @@ export class UserController {
         .status(statusCode.Created)
         .json({ status: true, message: message.USERDELETED });
     } catch (error: any) {
-         const errorMessage = errorHandler(error);
-         return { status: false, ...errorMessage };
+      const errorMessage = errorHandler(error);
+      return { status: false, ...errorMessage };
     }
   }
 
@@ -118,8 +118,8 @@ export class UserController {
       const data = await this.userService.getUserById(id);
       return res.status(statusCode.Created).json({ status: true, data: data });
     } catch (error: any) {
-        const errorMessage = errorHandler(error);
-        return res.json({ status: false, ...errorMessage });
+      const errorMessage = errorHandler(error);
+      return res.json({ status: false, ...errorMessage });
     }
   }
 }

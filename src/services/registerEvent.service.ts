@@ -6,8 +6,8 @@ import { RegisterEvent } from "../models";
 export class RegisterEventService {
   async registerEvent(registerData: IRegisterEvent) {
     try {
-      const data=await RegisterEvent.create(registerData);
-      return data
+      const data = await RegisterEvent.create(registerData);
+      // return data
     } catch (error: any) {
       throw (error);
     }
@@ -25,6 +25,14 @@ export class RegisterEventService {
   async getRegisterEventById(registerId: string) {
     try {
       const data = await RegisterEvent.findById(registerId);
+      return data;
+    } catch (error: any) {
+      throw (error);
+    }
+  }
+  async getAllRegisteredEventForUser(userId: string) {
+    try {
+      const data = await RegisterEvent.find({ userId: userId });
       return data;
     } catch (error: any) {
       throw (error);

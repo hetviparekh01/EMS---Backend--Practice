@@ -54,4 +54,18 @@ export class RegisterEventController {
       return res.json({ status: false, ...errorMessage });
     }
   }
+
+  @httpGet("/getAllRegisteredEventForUser", RoleMiddleware(["admin", "user"]))
+  async getAllRegisteredEventForUser(req: Request, res: Response) {
+    try {
+      const id = req.headers._id as string;
+      const data=await this.registerEventService.getAllRegisteredEventForUser(id);
+      return res
+        .status(statusCode.Created)
+        .json({ status: true, data:data });
+    } catch (error: any) {
+      const errorMessage = errorHandler(error);
+      return res.json({ status: false, ...errorMessage });
+    }
+  }
 }

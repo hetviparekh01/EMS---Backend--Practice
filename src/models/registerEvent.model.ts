@@ -5,9 +5,11 @@ const RegisterEventSchema = new Schema({
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "Evnet is required to registered"],
+    ref:'events'
   },
-  users: {
+  userId: {
       type: mongoose.Schema.Types.ObjectId,
+      ref:'users'
   },
   ticketQuantity:{
     type:Number,
