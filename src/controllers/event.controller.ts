@@ -16,14 +16,12 @@ export class EventController {
   async addEvent(req: Request, res: Response) {
     try {
       const eventData = req.body;
-      console.log(eventData);
       await this.eventService.addEvent(eventData);
       return res
-        .status(statusCode.Created)
         .json({ status: true, message: message.EVENTCREATED });
     } catch (error: any) {
           const errorMessage = errorHandler(error);
-           return res.json({ status: false, ...errorMessage });
+           return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -34,11 +32,10 @@ export class EventController {
       const { id } = req.params;
       await this.eventService.updateEvent(id, eventData);
       return res
-        .status(statusCode.Created)
         .json({ status: true, message: message.EVENTUPDATED });
     } catch (error: any) {
         const errorMessage = errorHandler(error);
-        return res.json({ status: false, ...errorMessage });
+        return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -52,7 +49,7 @@ export class EventController {
         .json({ status: true, message: message.EVENTDELETED });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -60,12 +57,10 @@ export class EventController {
   async getAllevent(req: Request, res: Response) {
     try {
       const data = await this.eventService.getAllEvent();
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, data: data });
+      return res.json({ status: true, data: data });
     } catch (error: any) {
         const errorMessage = errorHandler(error);
-        return res.json({ status: false, ...errorMessage });
+        return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -74,12 +69,10 @@ export class EventController {
     try {
       const { id } = req.params;
       const data = await this.eventService.geteventById(id);
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, data: data });
+      return res.json({ status: true, data: data });
     } catch (error: any) {
        const errorMessage = errorHandler(error);
-       return res.json({ status: false, ...errorMessage });
+       return res.json({ status: false, message:errorMessage });
     }
   }
 }

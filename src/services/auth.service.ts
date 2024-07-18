@@ -21,7 +21,7 @@ export class AuthService{
             if(!user){
                 throw new Error(message.USERNOTFOUND)
             }
-            let isValidate=bcrypt.compare(userData.password,user.password)
+            let isValidate=bcrypt.compareSync(userData.password,user.password)
             if(!isValidate){
                 throw new Error(message.INVALIDCREDENTIALS)
             }

@@ -63,9 +63,7 @@ export class UserController {
         userData.profileImage = req.file.filename;
       }
       await this.userService.updateUser(id, userData);
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, message: message.USERUPDATED });
+      return res.json({ status: true, message: message.USERUPDATED });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
       return { status: false, ...errorMessage };
@@ -77,12 +75,10 @@ export class UserController {
     try {
       const { id } = req.params;
       await this.userService.deleteUser(id);
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, message: message.USERDELETED });
+      return res.json({ status: true, message: message.USERDELETED });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return { status: false, ...errorMessage };
+      return { status: false, message: errorMessage };
     }
   }
 
@@ -92,11 +88,11 @@ export class UserController {
       const id = req.headers._id as string;
       await this.userService.deleteUser(id);
       return res
-        .status(statusCode.Created)
         .json({ status: true, message: message.USERDELETED });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+
+      return res.json({ status: false, message: errorMessage });
     }
   }
 
@@ -104,22 +100,38 @@ export class UserController {
   async getAllUser(req: Request, res: Response) {
     try {
       const data = await this.userService.getAllUser();
-      return res.status(statusCode.Created).json({ status: true, data: data });
+      return res.json({ status: true, data: data });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({ status: false, message: errorMessage });
     }
   }
 
-  @httpGet("/getUserById", RoleMiddleware(["admin", "user"]))
+  @httpGet("/getUserById/:id", RoleMiddleware(["admin", "user"]))
   async getUserById(req: Request, res: Response) {
     try {
-      const id = req.headers._id as string;
+      const { id } = req.params;
       const data = await this.userService.getUserById(id);
-      return res.status(statusCode.Created).json({ status: true, data: data });
+      return res.json({ status: true, data: data });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({
+        status: false, message: errorMessage
+      })
+    }
+  }
+
+  @httpGet("/registerEvent", RoleMiddleware(["user"]))
+  async getRegisterEvent(req: Request, res: Response) {
+    try {
+      const id = req.headers._id as string;
+      const data = await this.userService.getRegisterEvent(id);
+      return res.json({ status: true, data: data });
+    } catch (error: any) {
+      const errorMessage = errorHandler(error);
+      return res.json({
+        status: false, message: errorMessage
+      })
     }
   }
 }

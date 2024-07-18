@@ -14,7 +14,7 @@ export const RoleMiddleware=(roles:string[])=>{
             next()
         } catch (error:any) {
                 const errorMessage = errorHandler(error);
-                return res.json({ status: false, ...errorMessage });
+                return res.json({ status: false, message:errorMessage });
         }
     }
 }

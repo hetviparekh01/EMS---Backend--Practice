@@ -21,23 +21,21 @@ export class RegisterEventController {
       const data = await this.registerEventService.registerEvent(
         registerEventData
       );
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, message: message.EVENTREGISTERED, data: data });
+      return res.json({ status: true, message: message.EVENTREGISTERED, data: data });
     } catch (error: any) {
      const errorMessage = errorHandler(error);
-     return res.json({ status: false, ...errorMessage });
+     return res.json({ status: false, message:errorMessage });
     }
   }
 
-  @httpGet("/getAllRegisteredEvent", RoleMiddleware(["admin"]))
+  @httpGet("/registerEvent", RoleMiddleware(["admin"]))
   async getAllRegisteredEvent(req: Request, res: Response) {
     try {
       const data = await this.registerEventService.getAllRegisteredEvent();
-      return res.status(statusCode.Created).json({ status: true, data: data });
+      return res.json({ status: true, data: data });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -46,12 +44,10 @@ export class RegisterEventController {
     try {
       const { id } = req.params;
       await this.registerEventService.getRegisterEventById(id);
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, message: message.EVENTDELETED });
+      return res.json({ status: true, message: message.EVENTDELETED });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({ status: false, message:errorMessage });
     }
   }
 
@@ -60,12 +56,10 @@ export class RegisterEventController {
     try {
       const id = req.headers._id as string;
       const data=await this.registerEventService.getAllRegisteredEventForUser(id);
-      return res
-        .status(statusCode.Created)
-        .json({ status: true, data:data });
+      return res.json({ status: true, data:data });
     } catch (error: any) {
       const errorMessage = errorHandler(error);
-      return res.json({ status: false, ...errorMessage });
+      return res.json({ status: false, message:errorMessage });
     }
   }
 }

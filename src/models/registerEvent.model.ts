@@ -18,7 +18,7 @@ const RegisterEventSchema = new Schema({
   finalAmt: {
     type: Number,
   },
-});
+},{timestamps:true});
 
 RegisterEventSchema.pre("save", async function (next) {
   const event = await Event.findById(this.eventId);
